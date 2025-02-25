@@ -3,23 +3,28 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BB0C67982D5E618B006E39D6 /* uni_goApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0C67972D5E618B006E39D6 /* uni_goApp.swift */; };
 		BB0C679A2D5E618B006E39D6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB0C67992D5E618B006E39D6 /* ContentView.swift */; };
-		BB0C679C2D5E618D006E39D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB0C679B2D5E618D006E39D6 /* Assets.xcassets */; };
 		BB0C679F2D5E618D006E39D6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BB0C679E2D5E618D006E39D6 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		81D74A5B2D6D90DB0096F5A4 /* uni-go-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "uni-go-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BB0C67942D5E618B006E39D6 /* uni go.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "uni go.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB0C67972D5E618B006E39D6 /* uni_goApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = uni_goApp.swift; sourceTree = "<group>"; };
 		BB0C67992D5E618B006E39D6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		BB0C679B2D5E618D006E39D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BB0C679E2D5E618D006E39D6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		81D749FA2D6D1CAC0096F5A4 /* App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = App; sourceTree = "<group>"; };
+		81D749FB2D6D1D020096F5A4 /* Features */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Features; sourceTree = "<group>"; };
+		81D749FD2D6D1D360096F5A4 /* Core */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Core; sourceTree = "<group>"; };
+		81D74A032D6D1D920096F5A4 /* Resources */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Resources; sourceTree = "<group>"; };
+		81D74A5C2D6D91DD0096F5A4 /* Extensions */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Extensions; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		BB0C67912D5E618B006E39D6 /* Frameworks */ = {
@@ -51,9 +56,13 @@
 		BB0C67962D5E618B006E39D6 /* uni go */ = {
 			isa = PBXGroup;
 			children = (
-				BB0C67972D5E618B006E39D6 /* uni_goApp.swift */,
+				81D74A5C2D6D91DD0096F5A4 /* Extensions */,
+				81D74A5B2D6D90DB0096F5A4 /* uni-go-Info.plist */,
+				81D74A032D6D1D920096F5A4 /* Resources */,
+				81D749FD2D6D1D360096F5A4 /* Core */,
+				81D749FB2D6D1D020096F5A4 /* Features */,
+				81D749FA2D6D1CAC0096F5A4 /* App */,
 				BB0C67992D5E618B006E39D6 /* ContentView.swift */,
-				BB0C679B2D5E618D006E39D6 /* Assets.xcassets */,
 				BB0C679D2D5E618D006E39D6 /* Preview Content */,
 			);
 			path = "uni go";
@@ -75,12 +84,20 @@
 			buildConfigurationList = BB0C67A22D5E618D006E39D6 /* Build configuration list for PBXNativeTarget "uni go" */;
 			buildPhases = (
 				BB0C67902D5E618B006E39D6 /* Sources */,
+				81D74A0B2D6D43670096F5A4 /* ShellScript */,
 				BB0C67912D5E618B006E39D6 /* Frameworks */,
 				BB0C67922D5E618B006E39D6 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				81D749FA2D6D1CAC0096F5A4 /* App */,
+				81D749FB2D6D1D020096F5A4 /* Features */,
+				81D749FD2D6D1D360096F5A4 /* Core */,
+				81D74A032D6D1D920096F5A4 /* Resources */,
+				81D74A5C2D6D91DD0096F5A4 /* Extensions */,
 			);
 			name = "uni go";
 			productName = "uni go";
@@ -126,11 +143,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB0C679F2D5E618D006E39D6 /* Preview Assets.xcassets in Resources */,
-				BB0C679C2D5E618D006E39D6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		81D74A0B2D6D43670096F5A4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BB0C67902D5E618B006E39D6 /* Sources */ = {
@@ -138,7 +175,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB0C679A2D5E618B006E39D6 /* ContentView.swift in Sources */,
-				BB0C67982D5E618B006E39D6 /* uni_goApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +310,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"uni go/Preview Content\"";
 				DEVELOPMENT_TEAM = 5HTNX68GPT;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "uni-go-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -303,7 +341,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"uni go/Preview Content\"";
 				DEVELOPMENT_TEAM = 5HTNX68GPT;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "uni-go-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
