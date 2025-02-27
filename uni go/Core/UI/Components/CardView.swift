@@ -10,7 +10,7 @@ import SwiftUI
 struct CardView: View {
     var icon: String
     var text: String
-
+    
     var body: some View {
         VStack {
             Image(icon)
@@ -18,7 +18,7 @@ struct CardView: View {
                 .scaledToFit()
                 .frame(width: 30, height: 30)
                 .padding(.top)
-
+            
             Text(text)
                 .font(.headline)
                 .foregroundColor(.black)

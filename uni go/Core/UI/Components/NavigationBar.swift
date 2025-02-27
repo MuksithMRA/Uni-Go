@@ -14,6 +14,8 @@ struct NavigationBar:View {
         
         HStack{
             Image("icon-left")
+                .resizable()
+                .scaledToFit()
                 .padding(.leading)
             
             Spacer()
@@ -21,9 +23,13 @@ struct NavigationBar:View {
             
             Text(title)
                 .font(.headline)
-                .frame(maxWidth: .infinity, alignment: .center)
+                .frame(maxWidth: .infinity)
             
             Spacer()
+            
+            Image(systemName: "circle.fill")
+                .opacity(0)
+                .frame(width: 24, height: 24)
             
         }
         .frame(maxWidth: .infinity)
