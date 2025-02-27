@@ -25,7 +25,7 @@ extension Font.TextStyle {
         case .title2: return 30
         case .title3: return 28
         case .headline: return 24
-        case .subheadline: return 10
+        case .subheadline: return 20
         case .body: return 18
         case .callout: return 16
         case .caption: return 14
@@ -36,38 +36,42 @@ extension Font.TextStyle {
         }
     }
 }
+
+enum CustomFont: String {
+    case poppinsRegular = "Poppins-Regular"
+    case poppinsMedium = "Poppins-Medium"
+    case poppinsSemiBold = "Poppins-SemiBold"
+    case poppinsBold = "Poppins-Bold"
+    case poppinsLight = "Poppins-Light"
+    case poppinsThin = "Poppins-Thin"
+    case poppinsBlack = "Poppins-Black"
+    case poppinsBlackItalic = "Poppins-BlackItalic"
+    case poppinsBoldItalic = "Poppins-BoldItalic"
+    case allantRegular = "Allant-Regular"
+    case allanBold = "Allan-Bold"
     
-    enum CustomFont: String {
-        case poppinsRegular = "Poppins-Regular"
-        case poppinsMedium = "Poppins-Medium"
-        case poppinsSemiBold = "Poppins-SemiBold"
-        case poppinsBold = "Poppins-Bold"
-        case poppinsLight = "Poppins-Light"
-        case poppinsThin = "Poppins-Thin"
-        case poppinsBlack = "Poppins-Black"
-        case poppinsBlackItalic = "Poppins-BlackItalic"
-        case poppinsBoldItalic = "Poppins-BoldItalic"
-        
-        init(weight: Font.Weight){
-            switch weight {
-            case .regular:
-                self = .poppinsRegular
-            case .black:
-                self = .poppinsBlack
-            case .light:
-                self = .poppinsLight
-            case .thin:
-                self = .poppinsThin
-            case .medium:
-                self = .poppinsMedium
-            case .semibold:
-                self = .poppinsSemiBold
-            case .bold:
-                self = .poppinsBold
-            case .heavy:
-                self = .poppinsBlackItalic
-            default:
-                self = .poppinsRegular
-            }
+    init(weight: Font.Weight){
+        switch weight {
+        case .ultraLight:
+            self = .allantRegular
+        case .regular:
+            self = .allanBold
+        case .black:
+            self = .poppinsBlack
+        case .light:
+            self = .poppinsLight
+        case .thin:
+            self = .poppinsThin
+        case .medium:
+            self = .poppinsMedium
+        case .semibold:
+            self = .poppinsSemiBold
+        case .bold:
+            self = .poppinsBold
+        case .heavy:
+            self = .poppinsBlackItalic
+        default:
+            self = .poppinsRegular
         }
     }
+}

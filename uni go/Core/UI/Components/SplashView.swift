@@ -15,7 +15,7 @@ struct SplashView: View {
     var body: some View {
         ZStack{
             if isActive {
-                ContentView()
+                LoginView()
             }else {
                 Image("bgSplash")
                     .resizable()
