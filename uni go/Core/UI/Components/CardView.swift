@@ -16,7 +16,7 @@ struct CardView: View {
             Image(icon)
                 .resizable()
                 .scaledToFit()
-                .frame(width: 50, height: 50)
+                .frame(width: 30, height: 30)
                 .padding(.top)
 
             Text(text)
@@ -24,7 +24,7 @@ struct CardView: View {
                 .foregroundColor(.black)
                 .padding(.top, 5)
         }
-        .frame(maxWidth: .infinity)
+        .frame(width: 100, height: 60)
         .padding()
         .background(Color.white)
         .cornerRadius(10)

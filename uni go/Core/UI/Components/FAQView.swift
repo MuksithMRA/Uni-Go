@@ -37,7 +37,9 @@ struct FAQView:View {
             .font(.headline)
             .padding(20)
             .foregroundStyle(.black)
-            .frame(maxWidth: .infinity , alignment: .center)
+            .frame(maxWidth: 300)
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
         
         Spacer()
         
