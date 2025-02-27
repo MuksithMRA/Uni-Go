@@ -1,13 +1,14 @@
 //
-//  FAQView.swift
+//  Feedback.swift
 //  uni go
 //
-//  Created by Menuka 046 on 2025-02-26.
+//  Created by Menuka 046 on 2025-02-27.
 //
 
 import SwiftUI
 
-struct FAQView:View {
+struct Feedback:View {
+    @State private var userInput: String = ""
     
     let columns=[
         GridItem(.flexible(), spacing: 20),
@@ -16,10 +17,11 @@ struct FAQView:View {
     var body: some View {
         
         VStack{
-            NavigationBar(title: "FAQs")
+            NavigationBar(title: "Feedback")
+                .frame(maxWidth: 400,maxHeight: 100)
         }
         
-        Image("FAQs")
+        Image("feedback")
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: 270,
@@ -27,13 +29,13 @@ struct FAQView:View {
         Spacer()
         
         
-        Text("How Can We help ?")
+        Text("Share Your Feedback")
             .font(.system(size: 24))
             .fontWeight(.bold)
             .foregroundStyle(.black)
         
         
-        Text("Need help? Check out our FAQs for quick answers!")
+        Text("Have questions or suggestions? We're here to help! Check out our FAQs or share your feedback to make Uni Go even better.")
             .font(.headline)
             .padding(20)
             .foregroundStyle(.black)
@@ -43,18 +45,22 @@ struct FAQView:View {
         
         Spacer()
         
-        LazyVGrid(columns: columns, spacing: 20){
-            CardView(icon: "general", text: "General")
-            CardView(icon: "location", text: "Locations")
-            CardView(icon: "updates", text: "Updates")
-            CardView(icon: "support", text: "Support")
+        TextField("Add Your Feedback...", text: $userInput)
+            .textFieldStyle(RoundedBorderTextFieldStyle())
+            .frame(width: 300)
+        
+            .padding()
+        
+        
+        MyButton(title: "Submit"){
         }
-        .padding(40)
+        .frame(maxWidth: 300)
+        .padding()
         
     }
 }
 
 #Preview {
-    FAQView()
+    Feedback()
 }
 

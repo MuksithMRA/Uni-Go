@@ -32,7 +32,7 @@ struct NavigationBar:View {
                 .frame(width: 24, height: 24)
             
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth:400, maxHeight: 200)
         .padding(.vertical)
         .background(Color.white)
         .cornerRadius(5)
