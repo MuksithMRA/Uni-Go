@@ -31,25 +31,30 @@ struct PlaceCardView: View {
                 .padding(8)
             }
             
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 5) {
                 HStack {
                     Image(systemName: "mappin.circle.fill")
                         .foregroundColor(.blue)
                     
                     Text(place.name)
-                        .font(.caption)
+                        .font(
+                            .poppins(
+                                fontStyle: .footnote,
+                                fontWeight: .semibold
+                            )
+                        )
                         .fontWeight(.bold)
                         .lineLimit(1)
                 }
                 
                 Text(place.floor)
-                    .font(.caption2)
+                    .font(.poppins(fontStyle: .footnote, fontWeight: .medium))
                     .foregroundColor(.gray)
                     .lineLimit(1)
                 
                 HStack {
                     Text("\(place.distance)m")
-                        .font(.caption2)
+                        .font(.poppins(fontStyle: .footnote, fontWeight: .medium))
                         .foregroundColor(.blue)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 2)
@@ -61,11 +66,11 @@ struct PlaceCardView: View {
                 
                 if !place.crowdLevel.isEmpty {
                     Text("Crowd level")
-                        .font(.caption2)
+                        .font(.poppins(fontStyle: .footnote, fontWeight: .medium))
                         .foregroundColor(.gray)
                     
                     Text(place.crowdLevel)
-                        .font(.caption)
+                        .font(.poppins(fontStyle: .footnote, fontWeight: .medium))
                         .foregroundColor(place.crowdLevel == "Very Crowded" ? .red : .green)
                         .padding(.horizontal, 8)
                         .padding(.vertical, 2)

@@ -59,16 +59,25 @@ struct NavigationDrawer: View {
                             .overlay(Circle().stroke(Color.white, lineWidth: 3))
                         
                         Text(currentUserName)
-                            .font(.title2)
-                            .fontWeight(.bold)
+                            .font(
+                                .poppins(
+                                    fontStyle: .subheadline,
+                                    fontWeight: .bold
+                                )
+                            )
                             .foregroundColor(.white)
                         
                         Text(currentUserID)
-                            .font(.subheadline)
+                            .font(
+                                .poppins(
+                                    fontStyle: .callout,
+                                    fontWeight: .medium
+                                )
+                            )
                             .foregroundColor(.white.opacity(0.9))
                         
                         Text(currentUserEmail)
-                            .font(.subheadline)
+                            .font(.poppins(fontStyle: .footnote, fontWeight: .medium))
                             .foregroundColor(.white.opacity(0.9))
                             .padding(.bottom, 20)
                     }

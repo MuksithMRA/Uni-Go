@@ -23,28 +23,34 @@ struct TripView: View {
                             
                             VStack(alignment: .leading) {
                                 Text(place.name)
-                                    .font(.headline)
+                                    .font(
+                                        .poppins(
+                                            fontStyle: .callout,
+                                            fontWeight: .semibold
+                                        )
+                                    )
                                 Text("\(place.date) \(place.startTime)")
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
                                 Text("\(place.distance) mins")
-                                    .font(.caption)
+                                    .font(.poppins(
+                                        fontStyle: .footnote,
+                                        fontWeight: .medium
+                                    ))
                                     .foregroundColor(.gray)
                             }
                             
                             Spacer()
                             
-                            Button(action: {
-                                
-                            }) {
-                                Text("Navigate")
-                                    .font(.caption)
-                                    .foregroundColor(.white)
-                                    .padding(.horizontal, 12)
-                                    .padding(.vertical, 6)
-                                    .background(Color.blue)
-                                    .cornerRadius(15)
-                            }
+                            MyButton(
+                                title: "Navigate",
+                                variant: .primary,
+                                size: .sm,
+                                width: .fixed(70),
+                                action: {
+                                    
+                                }
+                            )
                         }
                         .padding()
                         .background(Color.white)

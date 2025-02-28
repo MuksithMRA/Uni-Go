@@ -12,7 +12,7 @@ struct MapView: View {
     @Binding var searchText: String
     var places: [Place]
     @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 6.906499267775214, longitude: 79.87087692469832),
+        center: CLLocationCoordinate2D(latitude: 6.906, longitude: 79.870),
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
     )
     
@@ -23,7 +23,7 @@ struct MapView: View {
                     .foregroundColor(.gray)
                 
                 TextField("Where do you want to go?", text: $searchText)
-                    .font(.system(size: 16))
+                    .font(.poppins(fontStyle: .callout, fontWeight: .medium))
                 
                 Image(systemName: "mic.fill")
                     .foregroundColor(.blue)
@@ -44,7 +44,9 @@ struct MapView: View {
                     Image(systemName: "mappin.circle.fill")
                         .foregroundColor(.black)
                     Text("Places")
-                        .font(.headline)
+                        .font(
+                            .poppins(fontStyle: .callout, fontWeight: .semibold)
+                        )
                     Spacer()
                 }
                 .padding(.horizontal)

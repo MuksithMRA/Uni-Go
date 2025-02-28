@@ -19,13 +19,13 @@ struct NextEventCardView: View {
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(event.title)
-                    .font(.headline)
+                    .font(.poppins(fontStyle: .caption, fontWeight: .semibold))
                 
                 Text(event.location)
-                    .font(.subheadline)
+                    .font(.poppins(fontStyle: .footnote, fontWeight: .medium))
                 
                 Text("Lecture Start in \(event.remainingMinutes) mins")
-                    .font(.caption)
+                    .font(.poppins(fontStyle: .footnote, fontWeight: .medium))
                     .foregroundColor(.gray)
             }
             
