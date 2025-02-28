@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var campusID: String = ""
+    @State private var campusID: String = "Admin"
     @State private var isCampusValid = false
-    @State private var password: String = ""
+    @State private var password: String = "Admin@123"
     @State private var isPasswordValid = false
     @State private var isAuthenticated: Bool = false
     @State private var showingSignup: Bool = false
+    
+    @State private var showLoginSuccess = false
+    @State private var showLoginError = false
     
     // Hardcoded credentials
     let validCampusID = "Admin"
@@ -122,8 +125,10 @@ struct LoginView: View {
                         width: .full,
                         action: {
                             // Hardcoded login check
-                            if campusID == validCampusID && password == validPassword {
+                            if (campusID == validCampusID && password == validPassword) {
                                 isAuthenticated = true
+                            } else {
+                                showLoginError = true
                             }
                         }
                     )
@@ -152,6 +157,16 @@ struct LoginView: View {
             .padding(.horizontal, 24)
             .padding(.top, 40)
             .background(Color.white)
+            .customToast(
+                isPresented: $showLoginSuccess,
+                message: "Login Successful!",
+                style: .success
+            )
+            .customToast(
+                isPresented: $showLoginError,
+                message: "Login Failed!",
+                style: .error
+            )
             .navigationDestination(isPresented: $isAuthenticated) {
                 ContentView()
             }

@@ -143,4 +143,3 @@ extension View {
         self.modifier(ToastModifier(isPresented: isPresented, message: message, style: style, duration: duration))
     }
 }
-
