@@ -15,6 +15,8 @@ struct NavigationDrawer: View {
     let currentUserEmail: String
     let profileImageName: String
     
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
         ZStack {
             if isOpen {
@@ -28,11 +30,11 @@ struct NavigationDrawer: View {
             }
             
             HStack(spacing: 0) {
+                Spacer()
+                
                 VStack(spacing: 0) {
                     VStack(alignment: .center, spacing: 10) {
                         HStack {
-                            Spacer()
-                            
                             HStack(spacing: 5) {
                                 Image(systemName: "globe")
                                     .font(.system(size: 14))
@@ -43,8 +45,10 @@ struct NavigationDrawer: View {
                             .padding(.vertical, 8)
                             .background(Color.white)
                             .cornerRadius(20)
-                            .padding(.trailing, 16)
+                            .padding(.leading, 16)
                             .padding(.top, 16)
+                            
+                            Spacer()
                         }
                         
                         Image(profileImageName)
@@ -139,21 +143,19 @@ struct NavigationDrawer: View {
                             Spacer()
                                 .frame(height: 60)
                             
-                            // Logout button at the bottom
                             Button(action: {
-                                // Logout action
+                                dismiss()
                             }) {
                                 DrawerMenuItemView(icon: "rectangle.portrait.and.arrow.right", title: "Logout", isSelected: false)
                             }
                         }
                     }
                 }
+                .padding(.top, 50)
                 .frame(width: UIScreen.main.bounds.width * 0.8)
                 .background(Color.white)
-                .offset(x: isOpen ? 0 : -UIScreen.main.bounds.width * 0.8)
+                .offset(x: isOpen ? 0 : UIScreen.main.bounds.width * 0.8)
                 .animation(.easeInOut(duration: 0.3), value: isOpen)
-                
-                Spacer()
             }
         }
         .ignoresSafeArea()

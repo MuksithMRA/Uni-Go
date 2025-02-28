@@ -9,15 +9,12 @@ import SwiftUI
 
 struct NotificationView: View {
     @StateObject private var viewModel = NotificationsViewModel()
-    @Environment(\.dismiss) private var dismiss
+    var dismiss: () -> Void
     
     var body: some View {
         VStack(spacing: 0) {
             // Navigation bar
             NotificationHeaderView(dismiss: dismiss)
-            
-            // Tab selection
-            NotificationCategoryTabView(viewModel: viewModel)
             
             // Notification list
             ScrollView {
@@ -36,7 +33,7 @@ struct NotificationView: View {
 }
 
 struct NotificationHeaderView: View {
-    var dismiss: DismissAction
+    var dismiss: () -> Void
     
     var body: some View {
         HStack {
@@ -66,74 +63,6 @@ struct NotificationHeaderView: View {
         .padding(.horizontal)
         .padding(.vertical, 12)
         .background(Color.white)
-    }
-}
-
-struct NotificationCategoryTabView: View {
-    @ObservedObject var viewModel: NotificationsViewModel
-    
-    let categories: [(NotificationType, String, String)] = [
-        (.promo, "Promos", "megaphone.fill"),
-        (.transaction, "Transactions", "dollarsign.circle"),
-        (.alert, "Alerts", "envelope.badge"),
-        (.chat, "Chats", "bubble.left.and.bubble.right")
-    ]
-    
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 20) {
-                ForEach(categories, id: \.0) { type, name, icon in
-                    VStack {
-                        ZStack {
-                            Circle()
-                                .fill(type == .promo ? Color.red : Color(UIColor.systemGray5))
-                                .frame(width: 60, height: 60)
-                            
-                            Image(systemName: icon)
-                                .font(.title2)
-                                .foregroundColor(type == .promo ? .white : .gray)
-                            
-                            if type == .promo {
-                                ZStack {
-                                    Circle()
-                                        .fill(Color.orange)
-                                        .frame(width: 24, height: 24)
-                                    
-                                    Text("24")
-                                        .font(.caption)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.white)
-                                }
-                                .offset(x: 18, y: -18)
-                            } else if type == .alert {
-                                ZStack {
-                                    Circle()
-                                        .fill(Color.orange)
-                                        .frame(width: 24, height: 24)
-                                    
-                                    Text("1")
-                                        .font(.caption)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.white)
-                                }
-                                .offset(x: 18, y: -18)
-                            }
-                        }
-                        
-                        Text(name)
-                            .font(.subheadline)
-                            .foregroundColor(.black)
-                    }
-                    .padding(.vertical, 8)
-                    .onTapGesture {
-                        viewModel.selectedType = type
-                    }
-                }
-            }
-            .padding(.horizontal)
-        }
-        .background(Color.white)
-        .padding(.bottom, 8)
     }
 }
 
@@ -185,9 +114,13 @@ struct NotificationItemView: View {
         .padding()
         .background(Color.white)
         .cornerRadius(2)
+        .navigationBarBackButtonHidden(true)
     }
 }
 
-#Preview {
-    NotificationView()
+// Preview provider
+struct NotificationView_Previews: PreviewProvider {
+    static var previews: some View {
+        NotificationView(dismiss: {})
+    }
 }

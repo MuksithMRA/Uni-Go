@@ -168,7 +168,7 @@ struct LoginView: View {
                 style: .error
             )
             .navigationDestination(isPresented: $isAuthenticated) {
-                ContentView()
+                MainDashboardView()
             }
             .navigationDestination(isPresented: $showingSignup) {
                 SignupView()

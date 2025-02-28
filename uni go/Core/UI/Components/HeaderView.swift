@@ -91,7 +91,7 @@ struct HeaderView: View {
             }
             
             Button(action: {
-                withAnimation {
+                withAnimation(.easeInOut) {
                     showMenu.toggle()
                     
                     if showNotifications {
