@@ -78,13 +78,13 @@ struct MyButton: View {
     private var fontForSize: Font {
         switch size {
         case .xs:
-            return .system(size: 12)
+            return .poppins(fontStyle: .footnote, fontWeight: .bold)
         case .sm:
-            return .system(size: 14)
+            return .poppins(fontStyle: .caption, fontWeight: .bold)
         case .md:
-            return .system(size: 16)
+            return .poppins(fontStyle: .callout, fontWeight: .bold)
         case .lg:
-            return .system(size: 18)
+            return .poppins(fontStyle: .body, fontWeight: .bold)
         }
     }
     
