@@ -11,6 +11,7 @@ struct HeaderView: View {
     @Binding var showNotifications: Bool
     @Binding var showMenu: Bool
     @State private var notificationCount: Int = 5
+    var points: Int
     
     var body: some View {
         HStack {
@@ -62,6 +63,17 @@ struct HeaderView: View {
             }
             
             Spacer()
+            
+            HStack(spacing: 2) {
+                Image(systemName: "gift.fill")
+                    .foregroundColor(.yellow)
+                Text("\(points)")
+                    .font(.system(size: 14, weight: .bold))
+            }
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .background(Color.yellow.opacity(0.2))
+            .cornerRadius(15)
             
             Button(action: {
                 withAnimation {
@@ -115,7 +127,8 @@ struct HeaderView_Previews: PreviewProvider {
     static var previews: some View {
         HeaderView(
             showNotifications: .constant(false),
-            showMenu: .constant(false)
+            showMenu: .constant(false),
+            points: 50
         )
     }
 }

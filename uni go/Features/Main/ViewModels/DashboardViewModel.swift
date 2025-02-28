@@ -9,89 +9,118 @@ import SwiftUI
 import Combine
 
 class DashboardViewModel: ObservableObject {
+    @Published var userName: String = "Rakshath"
+    @Published var userID: String = "YR4COBBSC#####"
+    @Published var userEmail: String = "rakshath@student.nibm.lk"
+    @Published var userPoints: Int = 50
     
-    @Published var showNotifications = false
-    @Published var showMenu = false
-    @Published var selectedTab: TabBarView.TabItem = .home
-    @Published var selectedDrawerTab: String = "Home"
-    
-    // User data
-    let userData = UserData(
-        name: "Rakshath Maurya",
-        id: "YR3COBBSC#####",
-        email: "rakshath@student.nibm.lk",
-        profileImage: "profile_image"
-    )
-    
-    // Profile information
-    let profileInfo = ProfileInfo(
-        username: "Abdul",
-        points: 50,
-        progressValue: 0.4,
-        progressGoal: 100
-    )
-    
-    // Next event information
-    let nextEvent = EventInfo(
+    @Published var nextEvent: Event = Event(
         title: "IOS Lectures",
         location: "Harrison Hall",
-        startTime: "1:00 PM",
-        minutesRemaining: 30,
-        imageName: "lecture_hall"
+        startTime: "13:30",
+        remainingMinutes: 30,
+        date: "01/02/2025",
+        image: "lecHall_image"
     )
     
-    // Sample notifications
-    let notifications = [
-        NotificationItem(
-            title: "IOS Lecture",
-            message: "Your lecture starts in 30 minutes",
-            time: "12:00 PM",
-            isNew: true
+    @Published var searchedPlaces: [Place] = [
+        Place(
+            name: "CF - Canteen",
+            floor: "5th block, computing faculty",
+            distance: 400,
+            crowdLevel: "Very Crowded",
+            image: "canteen_image"
         ),
-        NotificationItem(
-            title: "Points Added",
-            message: "You've earned 10 new points!",
-            time: "Yesterday",
-            isNew: true
-        ),
-        NotificationItem(
-            title: "New Event",
-            message: "CS Department is organizing a hackathon",
-            time: "2 days ago",
-            isNew: false
+        Place(
+            name: "CF - Canteen",
+            floor: "5th block, computing faculty",
+            distance: 400,
+            crowdLevel: "Not Crowded",
+            image: "canteen_image"
         )
     ]
     
-    // Most searched places
-    let searchedPlaces = [
-        PlaceData(
-            title: "CF - Canteen",
-            location: "5th block, computing faculty",
-            distance: "400m",
-            crowdLevel: "Very Crowd",
-            isCrowded: true,
-            responseRate: 90,
-            imageName: "canteen_image",
-            isFavorite: false
+    @Published var places: [Place] = [
+        Place(
+            name: "Harrison Hall",
+            floor: "Computing Faculty",
+            distance: 10,
+            crowdLevel: "Not Crowded",
+            startTime: "13:30",
+            date: "01/02/2025",
+            image: "lecHall_image"
         ),
-        PlaceData(
-            title: "CF - Canteen",
-            location: "5th block, computing faculty",
-            distance: "400m",
-            crowdLevel: "Very Crowd",
-            isCrowded: true,
-            responseRate: 90,
-            imageName: "canteen_image",
-            isFavorite: true
+        Place(
+            name: "CF - Canteen",
+            floor: "5th block, computing faculty",
+            distance: 400,
+            crowdLevel: "Very Crowded",
+            image: "canteen_image"
         )
     ]
     
-    func handleDrawerTabSelection(tab: String) {
-        selectedDrawerTab = tab
-        
-        showMenu = false
-        
-        // Handle navigation based on the selected tab
-        // (In a real app, you'd implement proper navigation here)
-    }
+    @Published var recentLocations: [Place] = [
+        Place(
+            name: "Harrison Hall",
+            floor: "Computing Faculty",
+            distance: 10,
+            crowdLevel: "",
+            startTime: "13:30",
+            date: "01/02/2025",
+            image: "lecHall_image"
+        ),
+        Place(
+            name: "Harrison Hall",
+            floor: "Computing Faculty",
+            distance: 10,
+            crowdLevel: "",
+            startTime: "13:30",
+            date: "01/02/2025",
+            image: "lecHall_image"
+        ),
+        Place(
+            name: "Harrison Hall",
+            floor: "Computing Faculty",
+            distance: 10,
+            crowdLevel: "",
+            startTime: "13:30",
+            date: "01/02/2025",
+            image: "lecHall_image"
+        ),
+        Place(
+            name: "Harrison Hall",
+            floor: "Computing Faculty",
+            distance: 10,
+            crowdLevel: "",
+            startTime: "13:30",
+            date: "01/02/2025",
+            image: "lecHall_image"
+        ),
+        Place(
+            name: "Harrison Hall",
+            floor: "Computing Faculty",
+            distance: 10,
+            crowdLevel: "",
+            startTime: "13:30",
+            date: "01/02/2025",
+            image: "lecHall_image"
+        ),
+        Place(
+            name: "Canteen",
+            floor: "Ground Floor",
+            distance: 400,
+            crowdLevel: "Very Crowded",
+            startTime: "13:30",
+            date: "01/02/2025",
+            image: "canteen_image"
+        )
+    ]
+    
+    @Published var rewardHistory: [RewardActivity] = [
+        RewardActivity(title: "Credited as Dialog reload", points: 50, date: "01/02/2025", time: "13:30"),
+        RewardActivity(title: "Updated Canteen Crowd Level", points: 4, date: "01/02/2025", time: "13:30"),
+        RewardActivity(title: "Credited as Dialog reload", points: 50, date: "01/02/2025", time: "13:30"),
+        RewardActivity(title: "Updated Canteen Crowd Level", points: 4, date: "01/02/2025", time: "13:30"),
+        RewardActivity(title: "Credited as Dialog reload", points: 50, date: "01/02/2025", time: "13:30")
+    ]
 }

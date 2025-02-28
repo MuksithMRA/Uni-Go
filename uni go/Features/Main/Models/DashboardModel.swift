@@ -7,49 +7,28 @@
 
 import Foundation
 
-// Data model for Places
-struct PlaceData: Identifiable {
-    let id = UUID()
-    let title: String
-    let location: String
-    let distance: String
-    let crowdLevel: String
-    let isCrowded: Bool
-    let responseRate: Int
-    let imageName: String
-    let isFavorite: Bool
+struct Event {
+    var title: String
+    var location: String
+    var startTime: String
+    var remainingMinutes: Int
+    var date: String
+    var image: String = "lecture_hall"
 }
 
-// Model for user data
-struct UserData {
-    let name: String
-    let id: String
-    let email: String
-    let profileImage: String
+struct Place {
+    var name: String
+    var floor: String
+    var distance: Int
+    var crowdLevel: String
+    var startTime: String = ""
+    var date: String = ""
+    var image: String = "lecture_hall"
 }
 
-// Model for profile information
-struct ProfileInfo {
-    let username: String
-    let points: Int
-    let progressValue: Double
-    let progressGoal: Int
-}
-
-// Model for event information
-struct EventInfo {
-    let title: String
-    let location: String
-    let startTime: String
-    let minutesRemaining: Int
-    let imageName: String
-}
-
-// Model for notification
-struct NotificationItem: Identifiable {
-    let id = UUID()
-    let title: String
-    let message: String
-    let time: String
-    let isNew: Bool
+struct RewardActivity {
+    var title: String
+    var points: Int
+    var date: String
+    var time: String
 }

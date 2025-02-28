@@ -1,0 +1,51 @@
+//
+//  HomeView.swift
+//  uni go
+//
+//  Created by Pavithra Chamod on 2025-03-01.
+//
+
+import SwiftUI
+
+struct HomeView: View {
+    var userName: String
+    var userPoints: Int
+    var nextEvent: Event
+    var searchedPlaces: [Place]
+    
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                ProfileCardView(
+                    userName: userName,
+                    points: userPoints
+                )
+                .padding(.horizontal)
+                
+                Text("Next Event")
+                    .font(.headline)
+                    .padding(.horizontal)
+                
+                NextEventCardView(event: nextEvent)
+                    .padding(.horizontal)
+                
+                HStack {
+                    Image(systemName: "magnifyingglass.circle.fill")
+                        .foregroundColor(.black)
+                    Text("Most searched places")
+                        .font(.headline)
+                    Spacer()
+                }
+                .padding(.horizontal)
+                
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
+                    ForEach(searchedPlaces, id: \.name) { place in
+                        PlaceCardView(place: place)
+                    }
+                }
+                .padding(.horizontal)
+            }
+            .padding(.vertical)
+        }
+    }
+}
