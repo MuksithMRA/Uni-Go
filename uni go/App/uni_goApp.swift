@@ -11,7 +11,7 @@ import SwiftUI
 struct uni_goApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            SplashView()
         }
     }
 }
