@@ -1,15 +1,10 @@
-//
-//  PlaceCardView.swift
-//  uni go
-//
-//  Created by Pavithra Chamod on 2025-02-28.
-//
-
 import SwiftUI
 
 struct PlaceCardView: View {
     var place: Place
     @State private var isFavorite: Bool = false
+    @State private var showDetailPopup: Bool = false
+    @EnvironmentObject var mapViewModel: MapViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -86,5 +81,47 @@ struct PlaceCardView: View {
         .background(Color.white)
         .cornerRadius(10)
         .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
+        .onTapGesture {
+            showDetailPopup = true
+        }
+        .fullScreenCover(isPresented: $showDetailPopup) {
+            ZStack {
+                Color.clear
+                    .edgesIgnoringSafeArea(.all)
+                
+                PlaceDetailPopup(place: place)
+                    .environmentObject(mapViewModel)
+            }
+            .background(BackgroundClearView())
+        }
     }
+}
+
+struct BackgroundClearView: UIViewRepresentable {
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        DispatchQueue.main.async {
+            view.superview?.superview?.backgroundColor = .clear
+        }
+        return view
+    }
+    
+    func updateUIView(_ uiView: UIView, context: Context) {}
+}
+
+#Preview {
+    PlaceCardView(
+        place: Place(
+            name: "Harrison Hall",
+            floor: "Computing Faculty",
+            distance: 10,
+            crowdLevel: "Not Crowded",
+            startTime: "13:30",
+            date: "01/02/2025",
+            image: "lecHall_image"
+        )
+    )
+    .environmentObject(MapViewModel())
+    .frame(width: 200, height: 250)
+    .padding()
 }

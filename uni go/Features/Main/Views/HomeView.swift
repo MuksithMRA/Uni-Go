@@ -12,6 +12,7 @@ struct HomeView: View {
     var userPoints: Int
     var nextEvent: Event
     var searchedPlaces: [Place]
+    @StateObject private var mapViewModel = MapViewModel()
     
     var body: some View {
         ScrollView {
@@ -46,11 +47,15 @@ struct HomeView: View {
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
                     ForEach(searchedPlaces, id: \.name) { place in
                         PlaceCardView(place: place)
+                            .environmentObject(mapViewModel)
                     }
                 }
                 .padding(.horizontal)
             }
             .padding(.vertical)
+        }
+        .onAppear {
+            mapViewModel.places = searchedPlaces
         }
     }
 }

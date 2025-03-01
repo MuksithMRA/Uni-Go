@@ -11,10 +11,9 @@ import MapKit
 struct MapView: View {
     @Binding var searchText: String
     var places: [Place]
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 6.906, longitude: 79.870),
-        span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-    )
+    @StateObject private var viewModel = MapViewModel()
+    @State private var selectedPlace: Place?
+    @State private var showingDirections = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -36,8 +35,31 @@ struct MapView: View {
             )
             .padding()
             
-            Map(coordinateRegion: $region)
+            Map(coordinateRegion: $viewModel.region)
                 .edgesIgnoringSafeArea(.bottom)
+                .overlay(
+                    viewModel.showDirections ? 
+                    AnyView(
+                        VStack {
+                            Spacer()
+                            HStack {
+                                Spacer()
+                                Button(action: {
+                                    viewModel.showDirections = false
+                                }) {
+                                    Image(systemName: "xmark.circle.fill")
+                                        .font(.title)
+                                        .foregroundColor(.white)
+                                        .padding(8)
+                                        .background(Color.red)
+                                        .clipShape(Circle())
+                                        .shadow(radius: 3)
+                                }
+                                .padding()
+                            }
+                        }
+                    ) : AnyView(EmptyView())
+                )
             
             VStack(alignment: .leading) {
                 HStack {
@@ -55,7 +77,11 @@ struct MapView: View {
                     HStack(spacing: 15) {
                         ForEach(places, id: \.name) { place in
                             PlaceCardView(place: place)
+                                .environmentObject(viewModel)
                                 .frame(width: 180)
+                                .onTapGesture {
+                                    selectedPlace = place
+                                }
                         }
                     }
                     .padding(.horizontal)
@@ -63,6 +89,23 @@ struct MapView: View {
             }
             .padding(.vertical, 10)
             .background(Color.white)
+        }
+        .onAppear {
+            viewModel.places = places
+        }
+        .onChange(of: selectedPlace) { newPlace in
+            if let place = newPlace {
+                viewModel.selectedPlace = place
+            }
+        }
+    }
+}
+
+extension PlaceCardView {
+    func handleNavigation(using viewModel: MapViewModel) -> some View {
+        var updatedView = self
+        return updatedView.onTapGesture {
+            viewModel.navigateToPlace(place)
         }
     }
 }
