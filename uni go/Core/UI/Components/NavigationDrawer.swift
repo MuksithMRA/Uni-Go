@@ -14,6 +14,7 @@ struct NavigationDrawer: View {
     let currentUserID: String
     let currentUserEmail: String
     let profileImageName: String
+    var onMenuSelection: ((String) -> Void)? = nil
     
     @Environment(\.dismiss) private var dismiss
     
@@ -59,16 +60,25 @@ struct NavigationDrawer: View {
                             .overlay(Circle().stroke(Color.white, lineWidth: 3))
                         
                         Text(currentUserName)
-                            .font(.title2)
-                            .fontWeight(.bold)
+                            .font(
+                                .poppins(
+                                    fontStyle: .subheadline,
+                                    fontWeight: .bold
+                                )
+                            )
                             .foregroundColor(.white)
                         
                         Text(currentUserID)
-                            .font(.subheadline)
+                            .font(
+                                .poppins(
+                                    fontStyle: .callout,
+                                    fontWeight: .medium
+                                )
+                            )
                             .foregroundColor(.white.opacity(0.9))
                         
                         Text(currentUserEmail)
-                            .font(.subheadline)
+                            .font(.poppins(fontStyle: .footnote, fontWeight: .medium))
                             .foregroundColor(.white.opacity(0.9))
                             .padding(.bottom, 20)
                     }
@@ -82,6 +92,7 @@ struct NavigationDrawer: View {
                                 withAnimation {
                                     isOpen = false
                                 }
+                                onMenuSelection?("Home")
                             }) {
                                 DrawerMenuItemView(icon: "house.fill", title: "Home", isSelected: selectedTab == "Home")
                             }
@@ -91,6 +102,7 @@ struct NavigationDrawer: View {
                                 withAnimation {
                                     isOpen = false
                                 }
+                                onMenuSelection?("Places")
                             }) {
                                 DrawerMenuItemView(icon: "mappin.and.ellipse", title: "Places", isSelected: selectedTab == "Places")
                             }
@@ -100,6 +112,7 @@ struct NavigationDrawer: View {
                                 withAnimation {
                                     isOpen = false
                                 }
+                                onMenuSelection?("RewardStore")
                             }) {
                                 DrawerMenuItemView(icon: "gift", title: "Reward Store", isSelected: selectedTab == "RewardStore")
                             }
@@ -109,6 +122,7 @@ struct NavigationDrawer: View {
                                 withAnimation {
                                     isOpen = false
                                 }
+                                onMenuSelection?("Profile")
                             }) {
                                 DrawerMenuItemView(icon: "person.circle", title: "Profile", isSelected: selectedTab == "Profile")
                             }
@@ -118,6 +132,7 @@ struct NavigationDrawer: View {
                                 withAnimation {
                                     isOpen = false
                                 }
+                                onMenuSelection?("Settings")
                             }) {
                                 DrawerMenuItemView(icon: "gearshape", title: "Settings", isSelected: selectedTab == "Settings")
                             }
@@ -127,6 +142,7 @@ struct NavigationDrawer: View {
                                 withAnimation {
                                     isOpen = false
                                 }
+                                onMenuSelection?("Feedback")
                             }) {
                                 DrawerMenuItemView(icon: "hand.thumbsup", title: "Feedback", isSelected: selectedTab == "Feedback")
                             }
@@ -136,6 +152,7 @@ struct NavigationDrawer: View {
                                 withAnimation {
                                     isOpen = false
                                 }
+                                onMenuSelection?("FAQ")
                             }) {
                                 DrawerMenuItemView(icon: "info.circle", title: "FAQ", isSelected: selectedTab == "FAQ")
                             }

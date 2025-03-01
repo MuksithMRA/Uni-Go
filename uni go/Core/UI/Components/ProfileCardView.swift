@@ -23,15 +23,24 @@ struct ProfileCardView: View {
                 VStack(alignment: .leading) {
                     HStack {
                         Text("Hello \(userName),")
-                            .font(.title3)
-                            .fontWeight(.bold)
+                            .font(
+                                .poppins(
+                                    fontStyle: .body,
+                                    fontWeight: .semibold
+                                )
+                            )
                         
                         Image(systemName: "crown.fill")
                             .foregroundColor(.yellow)
                     }
                     
                     Text("You've earned")
-                        .font(.subheadline)
+                        .font(
+                            .poppins(
+                                fontStyle: .caption,
+                                fontWeight: .medium
+                            )
+                        )
                 }
                 
                 Spacer()
@@ -40,16 +49,19 @@ struct ProfileCardView: View {
                     Image(systemName: "gift.fill")
                         .foregroundColor(.yellow)
                     Text("\(points)")
-                        .font(.title3)
-                        .fontWeight(.bold)
+                        .font(
+                            .poppins(
+                                fontStyle: .headline,
+                                fontWeight: .medium
+                            )
+                        )
                 }
             }
             
             // Progress Bar
             VStack(alignment: .leading, spacing: 5) {
                 Text("Reward Progress")
-                    .font(.caption)
-                    .fontWeight(.medium)
+                    .font(.poppins(fontStyle: .footnote, fontWeight: .medium))
                 
                 ZStack(alignment: .leading) {
                     Rectangle()
@@ -66,7 +78,7 @@ struct ProfileCardView: View {
                 HStack {
                     Spacer()
                     Text("40/100")
-                        .font(.caption)
+                        .font(.poppins(fontStyle: .footnote, fontWeight: .medium))
                         .foregroundColor(.gray)
                 }
             }

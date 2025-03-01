@@ -22,7 +22,7 @@ struct TabBarView: View {
                 Image(systemName: "house.fill")
                     .font(.system(size: 20))
                 Text("Home")
-                    .font(.caption)
+                    .font(.poppins(fontStyle: .footnote, fontWeight: .medium))
             }
             .foregroundColor(selectedTab == .home ? .blue : .gray)
             .onTapGesture {
@@ -35,7 +35,7 @@ struct TabBarView: View {
                 Image(systemName: "map")
                     .font(.system(size: 20))
                 Text("Map")
-                    .font(.caption)
+                    .font(.poppins(fontStyle: .footnote, fontWeight: .medium))
             }
             .foregroundColor(selectedTab == .map ? .blue : .gray)
             .onTapGesture {
@@ -48,7 +48,7 @@ struct TabBarView: View {
                 Image(systemName: "arrow.triangle.swap")
                     .font(.system(size: 20))
                 Text("Trips")
-                    .font(.caption)
+                    .font(.poppins(fontStyle: .footnote, fontWeight: .medium))
             }
             .foregroundColor(selectedTab == .trips ? .blue : .gray)
             .onTapGesture {
@@ -61,7 +61,7 @@ struct TabBarView: View {
                 Image(systemName: "gift.fill")
                     .font(.system(size: 20))
                 Text("Rewards")
-                    .font(.caption)
+                    .font(.poppins(fontStyle: .footnote, fontWeight: .medium))
             }
             .foregroundColor(selectedTab == .rewards ? .blue : .gray)
             .onTapGesture {

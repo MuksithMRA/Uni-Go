@@ -23,7 +23,7 @@ struct HomeView: View {
                 .padding(.horizontal)
                 
                 Text("Next Event")
-                    .font(.headline)
+                    .font(.poppins(fontStyle: .body, fontWeight: .semibold))
                     .padding(.horizontal)
                 
                 NextEventCardView(event: nextEvent)
@@ -33,7 +33,12 @@ struct HomeView: View {
                     Image(systemName: "magnifyingglass.circle.fill")
                         .foregroundColor(.black)
                     Text("Most searched places")
-                        .font(.headline)
+                        .font(
+                            .poppins(
+                                fontStyle: .callout,
+                                fontWeight: .semibold
+                            )
+                        )
                     Spacer()
                 }
                 .padding(.horizontal)

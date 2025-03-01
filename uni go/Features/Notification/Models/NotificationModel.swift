@@ -17,12 +17,5 @@ struct NotificationModel: Identifiable {
     let badgeCount: Int?
     let hasImage: Bool
     let timeAgo: String
-    let type: NotificationType
-}
-
-enum NotificationType {
-    case promo
-    case transaction
-    case alert
-    case chat
+    let image: String
 }

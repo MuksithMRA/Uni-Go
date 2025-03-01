@@ -13,13 +13,11 @@ struct NotificationView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            // Navigation bar
             NotificationHeaderView(dismiss: dismiss)
             
-            // Notification list
             ScrollView {
                 LazyVStack(spacing: 0) {
-                    ForEach(viewModel.getFilteredNotifications()) { notification in
+                    ForEach(viewModel.notifications) { notification in
                         NotificationItemView(notification: notification)
                             .padding(.bottom, 1)
                     }
@@ -46,14 +44,14 @@ struct NotificationHeaderView: View {
             }
             
             Text("Notifications")
-                .font(.title2)
+                .font(.poppins(fontStyle: .subheadline, fontWeight: .medium))
                 .fontWeight(.bold)
                 .padding(.leading, 8)
             
             Spacer()
             
             Button(action: {
-                // More options menu
+                
             }) {
                 Image(systemName: "ellipsis.vertical")
                     .font(.title2)
@@ -74,18 +72,18 @@ struct NotificationItemView: View {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(notification.title)
-                        .font(.headline)
+                        .font(.poppins(fontStyle: .body, fontWeight: .medium))
                         .fontWeight(.semibold)
                         .foregroundColor(.black)
                     
                     Text(notification.message)
-                        .font(.subheadline)
+                        .font(.poppins(fontStyle: .footnote, fontWeight: .medium))
                         .foregroundColor(.secondary)
                         .lineLimit(3)
                     
                     HStack {
                         Button(action: {
-                            // More action
+                            
                         }) {
                             Text("More...")
                                 .font(.subheadline)
@@ -102,7 +100,7 @@ struct NotificationItemView: View {
                 }
                 
                 if notification.hasImage {
-                    Image(systemName: "square.fill")
+                    Image(notification.image)
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 70, height: 70)

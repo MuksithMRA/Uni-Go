@@ -19,20 +19,19 @@ struct RewardView: View {
                     .foregroundColor(.yellow)
                 
                 Text("\(userPoints)")
-                    .font(.system(size: 24, weight: .bold))
+                    .font(.poppins(fontStyle: .headline, fontWeight: .bold))
                 
                 Spacer()
                 
-                Button(action: {
-                    
-                }) {
-                    Text("Go to Store")
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 8)
-                        .background(Color.blue)
-                        .cornerRadius(20)
-                }
+                MyButton(
+                    title: "Go to Store",
+                    variant: .secondary,
+                    size: .md,
+                    width: .fixed(100),
+                    action: {
+                        
+                    }
+                )
             }
             .padding()
             .background(Color.blue.opacity(0.1))
@@ -51,7 +50,12 @@ struct RewardView: View {
                         HStack {
                             VStack(alignment: .leading) {
                                 Text(activity.title)
-                                    .font(.headline)
+                                    .font(
+                                        .poppins(
+                                            fontStyle: .callout,
+                                            fontWeight: .medium
+                                        )
+                                    )
                                 Text("\(activity.date) \(activity.time)")
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
