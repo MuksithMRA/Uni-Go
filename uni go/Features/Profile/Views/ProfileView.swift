@@ -87,8 +87,8 @@ struct ProfileView: View {
                 }
                 .background(Color.gray.opacity(0.05))
             }
-            .navigationBarHidden(true)
         }
+        .navigationBarHidden(true)
     }
 }
 

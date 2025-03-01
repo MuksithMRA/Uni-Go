@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 struct Event {
     var title: String
@@ -24,6 +25,7 @@ struct Place {
     var startTime: String = ""
     var date: String = ""
     var image: String = "lecture_hall"
+    var coordinate: CLLocationCoordinate2D? = nil
 }
 
 struct RewardActivity {

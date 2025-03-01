@@ -15,14 +15,18 @@ struct MainDashboardView: View {
     @State private var selectedTab: TabBarView.TabItem = .home
     @State private var searchText = ""
     @StateObject private var viewModel = DashboardViewModel()
-    @State private var navigateToProfile: Bool = false
-    @State private var navigateToRewardStore: Bool = false
-    @State private var navigateToSettings: Bool = false
-    @State private var navigateToFeedback: Bool = false
-    @State private var navigateToFAQ: Bool = false
+    @State private var navigationPath = NavigationPath()
+    
+    enum Destination {
+        case profile
+        case rewardStore
+        case settings
+        case feedback
+        case faq
+    }
     
     var body: some View {
-        NavigationView {
+        NavigationStack(path: $navigationPath) {
             ZStack {
                 VStack(spacing: 0) {
                     HeaderView(
@@ -92,34 +96,22 @@ struct MainDashboardView: View {
                 )
             }
             .navigationBarBackButtonHidden(true)
-            .background(
-                NavigationLink(destination: ProfileView(nextEvent: viewModel.nextEvent), isActive: $navigateToProfile) {
-                    EmptyView()
+            .navigationDestination(for: Destination.self) { destination in
+                switch destination {
+                case .profile:
+                    ProfileView(nextEvent: viewModel.nextEvent)
+                case .rewardStore:
+                    RewardStoreView()
+                case .settings:
+                    Text("Settings Screen")
+                case .feedback:
+                    Text("Feedback Screen")
+                case .faq:
+                    Text("FAQ Screen")
                 }
-            )
-            .background(
-                NavigationLink(destination: RewardStoreView(), isActive: $navigateToRewardStore) {
-                    EmptyView()
-                }
-            )
-            //            .background(
-            //                NavigationLink(destination: SettingsView(), isActive: $navigateToSettings) {
-            //                    EmptyView()
-            //                }
-            //            )
-            //            .background(
-            //                NavigationLink(destination: FeedbackView(), isActive: $navigateToFeedback) {
-            //                    EmptyView()
-            //                }
-            //            )
-            //            .background(
-            //                NavigationLink(destination: FAQView(), isActive: $navigateToFAQ) {
-            //                    EmptyView()
-            //                }
-            //            )
+            }
         }
         .navigationBarHidden(true)
-        .edgesIgnoringSafeArea(.bottom)
     }
     
     private func handleMenuSelection(_ selection: String) {
@@ -129,80 +121,20 @@ struct MainDashboardView: View {
         case "Places":
             selectedTab = .map
         case "RewardStore":
-            navigateToRewardStore = true
+            navigationPath.append(Destination.rewardStore)
         case "Profile":
-            navigateToProfile = true
+            navigationPath.append(Destination.profile)
         case "Settings":
-            navigateToSettings = true
+            navigationPath.append(Destination.settings)
         case "Feedback":
-            navigateToFeedback = true
+            navigationPath.append(Destination.feedback)
         case "FAQ":
-            navigateToFAQ = true
+            navigationPath.append(Destination.faq)
         default:
             break
         }
     }
 }
-
-//struct SettingsView: View {
-//    var body: some View {
-//        VStack {
-//            CustomHeader.custom(
-//                title: "Settings",
-//                showPoints: false,
-//                showNotification: false,
-//                showMenu: false,
-//                onBackTapped: {
-//                    print("Back tapped")
-//                }
-//            )
-//            Spacer()
-//            Text("Settings Screen")
-//            Spacer()
-//        }
-//        .navigationBarHidden(true)
-//    }
-//}
-//
-//struct FeedbackView: View {
-//    var body: some View {
-//        VStack {
-//            CustomHeader.custom(
-//                title: "Feedback",
-//                showPoints: false,
-//                showNotification: false,
-//                showMenu: false,
-//                onBackTapped: {
-//                    print("Back tapped")
-//                }
-//            )
-//            Spacer()
-//            Text("Feedback Screen")
-//            Spacer()
-//        }
-//        .navigationBarHidden(true)
-//    }
-//}
-//
-//struct FAQView: View {
-//    var body: some View {
-//        VStack {
-//            CustomHeader.custom(
-//                title: "FAQ",
-//                showPoints: false,
-//                showNotification: false,
-//                showMenu: false,
-//                onBackTapped: {
-//                    print("Back tapped")
-//                }
-//            )
-//            Spacer()
-//            Text("FAQ Screen")
-//            Spacer()
-//        }
-//        .navigationBarHidden(true)
-//    }
-//}
 
 #Preview {
     MainDashboardView()

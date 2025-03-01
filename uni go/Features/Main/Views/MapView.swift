@@ -11,10 +11,10 @@ import MapKit
 struct MapView: View {
     @Binding var searchText: String
     var places: [Place]
-    @State private var region = MKCoordinateRegion(
+    @State private var position: MapCameraPosition = .region(MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 6.906, longitude: 79.870),
         span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-    )
+    ))
     
     var body: some View {
         VStack(spacing: 0) {
@@ -36,8 +36,13 @@ struct MapView: View {
             )
             .padding()
             
-            Map(coordinateRegion: $region)
-                .edgesIgnoringSafeArea(.bottom)
+            // Using the new Map style without ForEach since we don't have coordinates yet
+            Map(position: $position) {
+                // Since your current Place objects don't have coordinates,
+                // we'll just show a marker at the center for now
+                Marker("NIBM Campus", coordinate: CLLocationCoordinate2D(latitude: 6.906, longitude: 79.870))
+            }
+            .edgesIgnoringSafeArea(.bottom)
             
             VStack(alignment: .leading) {
                 HStack {
