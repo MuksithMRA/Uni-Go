@@ -2,7 +2,7 @@
 //  SettingsView.swift
 //  uni go
 //
-//  Created by Cascade on 2025-03-01.
+//  Created by Abdul Muksith on 2025-03-01.
 //
 
 import SwiftUI
