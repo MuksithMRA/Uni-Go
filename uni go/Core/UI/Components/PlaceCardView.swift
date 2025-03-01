@@ -5,6 +5,12 @@ struct PlaceCardView: View {
     @State private var isFavorite: Bool = false
     @State private var showDetailPopup: Bool = false
     @EnvironmentObject var mapViewModel: MapViewModel
+    @Binding var selectedTab: TabBarView.TabItem
+    
+    init(place: Place, selectedTab: Binding<TabBarView.TabItem> = .constant(.home)) {
+        self.place = place
+        self._selectedTab = selectedTab
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -89,8 +95,14 @@ struct PlaceCardView: View {
                 Color.clear
                     .edgesIgnoringSafeArea(.all)
                 
-                PlaceDetailPopup(place: place)
-                    .environmentObject(mapViewModel)
+                PlaceDetailPopup(
+                    place: place,
+                    selectedTab: Binding<TabBarView.TabItem?>(
+                        get: { self.selectedTab },
+                        set: { if let newValue = $0 { self.selectedTab = newValue } }
+                    )
+                )
+                .environmentObject(mapViewModel)
             }
             .background(BackgroundClearView())
         }

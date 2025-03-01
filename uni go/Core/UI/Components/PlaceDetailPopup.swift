@@ -5,7 +5,15 @@ struct PlaceDetailPopup: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var isFavorite: Bool = false
     @State private var estimatedTime: String = "Calculating..."
+    @State private var selectedCrowdLevel: String
     @EnvironmentObject var mapViewModel: MapViewModel
+    @Binding var selectedTab: TabBarView.TabItem?
+    
+    init(place: Place, selectedTab: Binding<TabBarView.TabItem?> = .constant(nil)) {
+        self.place = place
+        self._selectedCrowdLevel = State(initialValue: place.crowdLevel)
+        self._selectedTab = selectedTab
+    }
     
     var body: some View {
         ZStack {
@@ -75,13 +83,13 @@ struct PlaceDetailPopup: View {
                                 .fontWeight(.semibold)
                             
                             HStack {
-                                Text(place.crowdLevel)
+                                Text(selectedCrowdLevel)
                                     .font(.subheadline)
                                     .fontWeight(.medium)
-                                    .foregroundColor(crowdLevelColor)
+                                    .foregroundColor(crowdLevelColor(for: selectedCrowdLevel))
                                     .padding(.horizontal, 12)
                                     .padding(.vertical, 6)
-                                    .background(crowdLevelColor.opacity(0.1))
+                                    .background(crowdLevelColor(for: selectedCrowdLevel).opacity(0.1))
                                     .cornerRadius(8)
                                 
                                 Spacer()
@@ -92,7 +100,7 @@ struct PlaceDetailPopup: View {
                                     .font(.subheadline)
                                     .foregroundColor(.gray)
                                 
-                                CrowdLevelGraph(crowdLevel: place.crowdLevel)
+                                CrowdLevelGraph(crowdLevel: selectedCrowdLevel)
                                     .frame(height: 100)
                                     .padding(.vertical, 8)
                             }
@@ -131,8 +139,60 @@ struct PlaceDetailPopup: View {
                         Divider()
                     }
                     
+                    VStack(alignment: .leading, spacing: 10) {
+                        Text("Update Current Crowd Level")
+                            .font(.headline)
+                            .fontWeight(.semibold)
+                        
+                        Text("Help others by sharing how crowded it is right now")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                        
+                        HStack(spacing: 8) {
+                            CrowdLevelButton(
+                                title: "Not Crowded",
+                                isSelected: selectedCrowdLevel == "Not Crowded",
+                                color: .green
+                            ) {
+                                selectedCrowdLevel = "Not Crowded"
+                            }
+                            
+                            CrowdLevelButton(
+                                title: "Moderate",
+                                isSelected: selectedCrowdLevel == "Moderate",
+                                color: .yellow
+                            ) {
+                                selectedCrowdLevel = "Moderate"
+                            }
+                            
+                            CrowdLevelButton(
+                                title: "Crowded",
+                                isSelected: selectedCrowdLevel == "Crowded",
+                                color: .orange
+                            ) {
+                                selectedCrowdLevel = "Crowded"
+                            }
+                            
+                            CrowdLevelButton(
+                                title: "Very Crowded",
+                                isSelected: selectedCrowdLevel == "Very Crowded",
+                                color: .red
+                            ) {
+                                selectedCrowdLevel = "Very Crowded"
+                            }
+                        }
+                        .padding(.vertical, 4)
+                    }
+                    
+                    Divider()
+                    
                     Button(action: {
                         mapViewModel.navigateToPlace(place)
+                        
+                        if let selectedTab = selectedTab {
+                            self.selectedTab = .map
+                        }
+                        
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         HStack {
@@ -153,9 +213,9 @@ struct PlaceDetailPopup: View {
             .background(Color.white)
             .cornerRadius(16)
             .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
-            .padding(.horizontal, 24)
-            .frame(maxWidth: 360)
-            .frame(maxHeight: UIScreen.main.bounds.height * 0.8)
+            .padding(.horizontal, 20)
+            .frame(width: min(UIScreen.main.bounds.width * 0.9, 420))
+            .frame(maxHeight: UIScreen.main.bounds.height * 0.85)
             .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
         }
         .onAppear {
@@ -163,8 +223,8 @@ struct PlaceDetailPopup: View {
         }
     }
     
-    private var crowdLevelColor: Color {
-        switch place.crowdLevel {
+    private func crowdLevelColor(for level: String) -> Color {
+        switch level {
         case "Very Crowded":
             return .red
         case "Crowded":
@@ -190,6 +250,31 @@ struct PlaceDetailPopup: View {
                     estimatedTime = "Unknown"
                 }
             }
+        }
+    }
+}
+
+struct CrowdLevelButton: View {
+    var title: String
+    var isSelected: Bool
+    var color: Color
+    var action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .font(.system(size: 10, weight: .medium))
+                .foregroundColor(isSelected ? .white : color)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 6)
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(isSelected ? color : color.opacity(0.1))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8)
+                        .stroke(color, lineWidth: 1)
+                )
         }
     }
 }

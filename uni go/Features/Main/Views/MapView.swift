@@ -14,6 +14,13 @@ struct MapView: View {
     @StateObject private var viewModel = MapViewModel()
     @State private var selectedPlace: Place?
     @State private var showingDirections = false
+    @Binding var selectedTab: TabBarView.TabItem
+    
+    init(searchText: Binding<String>, places: [Place], selectedTab: Binding<TabBarView.TabItem> = .constant(.map)) {
+        self._searchText = searchText
+        self.places = places
+        self._selectedTab = selectedTab
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -76,7 +83,7 @@ struct MapView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 15) {
                         ForEach(places, id: \.name) { place in
-                            PlaceCardView(place: place)
+                            PlaceCardView(place: place, selectedTab: $selectedTab)
                                 .environmentObject(viewModel)
                                 .frame(width: 180)
                                 .onTapGesture {

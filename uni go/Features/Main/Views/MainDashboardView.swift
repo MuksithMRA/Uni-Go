@@ -36,13 +36,16 @@ struct MainDashboardView: View {
                             userName: viewModel.userName,
                             userPoints: viewModel.userPoints,
                             nextEvent: viewModel.nextEvent,
-                            searchedPlaces: viewModel.searchedPlaces
+                            searchedPlaces: viewModel.searchedPlaces,
+                            searchText: $searchText,
+                            selectedTab: $selectedTab
                         )
                         .tag(TabBarView.TabItem.home)
                         
                         MapView(
                             searchText: $searchText,
-                            places: viewModel.places
+                            places: viewModel.places,
+                            selectedTab: $selectedTab
                         )
                         .tag(TabBarView.TabItem.map)
                         
@@ -91,7 +94,7 @@ struct MainDashboardView: View {
                     }
                 )
             }
-            .navigationBarBackButtonHidden(true)
+            .navigationBarBackButtonHidden(false)
             .background(
                 NavigationLink(destination: ProfileView(nextEvent: viewModel.nextEvent), isActive: $navigateToProfile) {
                     EmptyView()

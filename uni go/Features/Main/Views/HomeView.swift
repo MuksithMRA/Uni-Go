@@ -12,7 +12,18 @@ struct HomeView: View {
     var userPoints: Int
     var nextEvent: Event
     var searchedPlaces: [Place]
+    @Binding var searchText: String
+    @Binding var selectedTab: TabBarView.TabItem
     @StateObject private var mapViewModel = MapViewModel()
+    
+    init(userName: String, userPoints: Int, nextEvent: Event, searchedPlaces: [Place], searchText: Binding<String>, selectedTab: Binding<TabBarView.TabItem>) {
+        self.userName = userName
+        self.userPoints = userPoints
+        self.nextEvent = nextEvent
+        self.searchedPlaces = searchedPlaces
+        self._searchText = searchText
+        self._selectedTab = selectedTab
+    }
     
     var body: some View {
         ScrollView {
@@ -46,7 +57,7 @@ struct HomeView: View {
                 
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
                     ForEach(searchedPlaces, id: \.name) { place in
-                        PlaceCardView(place: place)
+                        PlaceCardView(place: place, selectedTab: $selectedTab)
                             .environmentObject(mapViewModel)
                     }
                 }
