@@ -13,6 +13,8 @@ struct RewardStoreView: View {
         RewardItem(title: "Dialog LKR 100 Reload", imageName: "Dialog_logo", points: 100),
         RewardItem(title: "Dialog LKR 500 Reload", imageName: "Dialog_logo", points: 500)
     ]
+    
+    @Environment(\.dismiss) private var dismiss
     var body: some View {
         VStack(spacing: 0) {
             CustomHeader.custom(
@@ -21,7 +23,7 @@ struct RewardStoreView: View {
                 showNotification: false,
                 showMenu: false,
                 onBackTapped: {
-                    print("Back tapped")
+                    dismiss()
                 }
             )
             .background(Color.white)

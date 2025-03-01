@@ -102,21 +102,21 @@ struct MainDashboardView: View {
                     EmptyView()
                 }
             )
-            //            .background(
-            //                NavigationLink(destination: SettingsView(), isActive: $navigateToSettings) {
-            //                    EmptyView()
-            //                }
-            //            )
-            //            .background(
-            //                NavigationLink(destination: FeedbackView(), isActive: $navigateToFeedback) {
-            //                    EmptyView()
-            //                }
-            //            )
-            //            .background(
-            //                NavigationLink(destination: FAQView(), isActive: $navigateToFAQ) {
-            //                    EmptyView()
-            //                }
-            //            )
+                        .background(
+                            NavigationLink(destination: SettingsView(), isActive: $navigateToSettings) {
+                                EmptyView()
+                            }
+                        )
+                        .background(
+                            NavigationLink(destination: Feedback(), isActive: $navigateToFeedback) {
+                                EmptyView()
+                            }
+                        )
+                        .background(
+                            NavigationLink(destination: FAQView(), isActive: $navigateToFAQ) {
+                                EmptyView()
+                            }
+                        )
         }
         .navigationBarHidden(true)
         .edgesIgnoringSafeArea(.bottom)

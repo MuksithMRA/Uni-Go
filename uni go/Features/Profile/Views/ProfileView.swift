@@ -15,6 +15,8 @@ struct ProfileView: View {
     @State private var password: String = "••••••••••••"
     var nextEvent: Event
     
+    @Environment(\.dismiss) private var dismiss
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -24,7 +26,7 @@ struct ProfileView: View {
                         pointsValue: 50,
                         notificationCount: 2,
                         onBackTapped: {
-                            print("Back button tapped")
+                            dismiss()
                         },
                         onNotificationTapped: {
                             print("Notification button tapped")
